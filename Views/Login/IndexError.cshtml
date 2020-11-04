@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bookface</title>
+</head>
+<body>
+    <!-- nav -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" asp-area="" asp-controller="Login" asp-action="Index">Bookface</a>
+            </div>
+        </div>
+    </nav>
+    <!-- ./nav -->
+    <!-- main -->
+    <main class="container">
+        <h1 class="text-center">
+            Bienvenido a Bookface!
+        </h1> <br><br>
+
+        <div class="row justify-content-center align-self-center">
+            <div class="col-md-6">
+                <h4>Iniciar Sesión</h4>
+
+                <!-- login form -->
+                <form method="post">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="username" placeholder="Username">
+                    </div>
+
+                    <div class="form-group">
+                        <input class="form-control" type="password" name="password" placeholder="Password">
+                    </div>
+
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" name="login" value="Login">
+                    </div>
+                </form>
+                <!-- ./login form -->
+
+                <!-- Error Message -->
+                <div class="badge-danger">
+                    Error: Usuario o contraseña incorrecta
+                </div>
+                <!-- ./Error Message -->
+                </div>
+        </div>
+    </main>
+    <!-- ./main -->
+</body>
+</html>

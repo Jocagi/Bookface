@@ -1,0 +1,127 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model Bookface.Models.MainView
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bookface</title>
+</head>
+<body>
+    <!-- nav -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <a class="navbar-brand" asp-area="" asp-controller="Login" asp-action="Index">Bookface</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>    
+                    <a class="navbar-brand" asp-area="" asp-controller="Login" asp-action="Index">Logout</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <!-- ./nav -->
+    <!-- main -->
+    <main class="container">
+        <div class="row">
+            <div class="col-md-3">
+
+                <!-- profile brief -->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <br>
+                        <img width="120" height="100" src="~/images/default.png" />
+                        <h5>@Model.Usuario.NOMBRE1 @Model.Usuario.NOMBRE2 @Model.Usuario.APELLIDO1 @Model.Usuario.APELLIDO2</h5>
+                        <h7 style="color: darkgray">@Model.Usuario.CORREO</h7>
+                        <p>Cant. max. amigos: @Model.Usuario.CANT_MAX_AMIGOS <br> 
+                            Creación: @Model.Usuario.FECHA_CREACION.Date.ToString("dd/MM/yyyy")</p>
+                    </div>
+                </div>
+                <!-- ./profile brief -->
+
+            </div>
+            <div class="col-md-6">
+
+                <!-- post form -->
+                <br>
+                <form method="post" action="">
+                    <div class="input-group">
+                        <input class="form-control" type="text" name="content" placeholder="Make a post...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="submit" name="post">Post</button>
+                        </span>
+                    </div>
+                </form><hr>
+                <!-- ./post form -->
+                <!-- feed -->
+                <div>
+                    
+                    @foreach (var item in Model.Publicaciones)
+                    {
+                        <!-- post -->
+                        <div class="panel panel-default">
+                            <br>
+                            <h5>
+                                @item.NOMBRE_USUARIO
+                            </h5>
+                            <!-- Fecha -->
+                            <div class="panel-footer" style="font-size: 10px; color: gray">
+                                <span>@item.FECHA_HORA</span>
+                            </div>
+                            <!-- Contenido -->
+                            <div class="panel-body">
+                                <p>@item.CONTENIDO</p>
+                            </div>
+                            <!-- Like/Dislike -->
+                            <div>
+                                <!-- Like -->
+                                <form method="post" action="Interaccion">
+                                    <input class="form-control" type="hidden" name="id" value="@item.ID_PUBLICACION">
+                                    <input class="form-control" type="hidden" name="type" value="1">
+                                    <button class="btn btn-success" style="font-size: 10px; padding: 5px 12px; float: left" type="submit" name="post">Like @item._LIKE</button>
+                                </form>
+                                <!-- Dislike -->
+                                <form method="post" action="Interaccion">
+                                    <input class="form-control" type="hidden" name="id" value="@item.ID_PUBLICACION">
+                                    <input class="form-control" type="hidden" name="type" value="2">
+                                    <button class="btn btn-danger" style="font-size: 10px; padding: 5px 12px; float: left" type="submit" name="post">Disike @item._DISLIKE</button>
+                                </form><hr>
+                            </div>
+                        </div>
+                        <!-- ./post -->
+
+                    }
+                    
+                </div>
+                <!-- ./feed -->
+            </div>
+
+            <!-- friends -->
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <br>
+                    <h4>Amigos</h4>
+                    <ul>
+                        @foreach (var item in Model.Amigos)
+                        {
+                            <li>
+                                <a>@item.NOMBRE1 @item.NOMBRE2 @item.APELLIDO1 @item.APELLIDO2</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <!-- ./friends -->
+
+        </div>
+    </main>
+    <!-- ./main -->
+</body>
+</html>
